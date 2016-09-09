@@ -1,0 +1,77 @@
+#include <stdio.h>
+
+int ibin(int n, int m);
+int jbin(int n, int m);
+
+void main()
+{
+    ibin(12, 5);
+}
+
+int ibin(int n, int m)      // FIRST FUNCTION
+{
+    int bin_coef;           // the output of the function
+    int j = (n - m);        // stores n - m
+    int numer = n;          // initializes numerator in the binomial coefficient formula
+    int denom1 = m;         // first multiplicand in the denominator
+    int denom2 = (n - m);   // second multiplicand in the denominator
+
+    while(n > 1)            // computes factorial of n
+    {
+        numer = numer * (n - 1);
+        n--;
+    }
+
+    while(m > 1)            // computes factorial of m
+    {
+        denom1 = (denom1 * (m - 1));
+        m--;
+    }
+
+    while(j > 1)            // computes factorial of n - m
+    {
+        denom2 = (denom2 * (j - 1));
+        j--;
+    }
+
+    bin_coef = (numer / (denom1 * denom2));     // computes binomial coefficient
+
+    printf("%d\n", bin_coef);               //prints the computed binomial coefficient
+}
+
+int jbin(int n, int m)      // SECOND FUNCTION
+{
+    int minimum;            // the minimum of m and n - m
+    int minfactorial = 1;   // will be used to store the factorial of minimum
+    int k = 1;              // counter variable
+    int bin_coef = 1;       // output of the function
+
+    if(m <= (n - m))        // code to determine the minimum of m and n - m
+    {
+        minimum = m;
+    }
+    else
+    {
+        minimum = n - m;
+    }
+
+    k = minimum;            // sets counter to aid in computing minfactorial
+
+    while(k > 1)
+    {
+        minfactorial = (minfactorial * k);
+        k--;
+    }
+
+    k = 1;                  // resets counter for use in next loop
+
+    while(k <= minimum)             // sets bin_coef to the numerator of the product
+    {
+        bin_coef = (bin_coef * (n - k + 1));
+        k++;
+    }
+
+    bin_coef = (bin_coef / minfactorial);   // divides bin_coef by the factorial of the minimum
+
+    printf("%d\n", bin_coef);
+}
